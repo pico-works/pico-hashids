@@ -1,10 +1,10 @@
 import sbt._
 import Keys._
 
-object Build extends Build with Version {
-  val specs2_core       = "org.specs2"      %%  "specs2-core"         % "3.6.2"
-  val specs2_scalacheck = "org.specs2"      %%  "specs2-scalacheck"   % "3.6.2"
-  val scalacheck        = "org.scalacheck"  %%  "scalacheck"          % "1.12.4"
+object Build extends sbt.Build {
+  val specs2_core       = "org.specs2"      %%  "specs2-core"         % "3.8.8"
+  val specs2_scalacheck = "org.specs2"      %%  "specs2-scalacheck"   % "3.8.8"
+  val scalacheck        = "org.scalacheck"  %%  "scalacheck"          % "1.13.4"
 
   implicit class ProjectOps(self: Project) {
     def standard: Project = {

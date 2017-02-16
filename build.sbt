@@ -1,7 +1,7 @@
 name := "hashids-scala"
 
-organization := "io.john-ky"
+organization := "pico-works"
 
-crossScalaVersions := Seq("2.10.5", "2.11.6")
+crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.0")
 
-version in ThisBuild := buildVersion
+version in ThisBuild := Process("./version.sh").lines.head.trim

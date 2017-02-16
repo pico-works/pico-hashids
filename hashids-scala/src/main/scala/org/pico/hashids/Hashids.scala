@@ -1,7 +1,7 @@
-package org.hashids
+package org.pico.hashids
 
 import scala.annotation.tailrec
-import org.hashids.impl._
+import org.pico.hashids.impl._
 
 class Hashids(
     salt: String = "",
@@ -14,7 +14,7 @@ class Hashids(
     if (numbers.isEmpty) {
       ""
     } else {
-      org.hashids.impl.encode(numbers:_*)(effectiveAlphabet, minHashLength, salt, seps, guards)
+      org.pico.hashids.impl.encode(numbers:_*)(effectiveAlphabet, minHashLength, salt, seps, guards)
     }
   }
 
@@ -31,13 +31,13 @@ class Hashids(
         result
     }
 
-    org.hashids.impl.encode(doSplit(Nil):_*)(effectiveAlphabet, minHashLength, salt, seps, guards)
+    org.pico.hashids.impl.encode(doSplit(Nil):_*)(effectiveAlphabet, minHashLength, salt, seps, guards)
   }
 
   def decode(hash: String): List[Long] = hash match {
     case "" => Nil
     case x =>
-      val res = org.hashids.impl.decode(x)(effectiveAlphabet, salt, seps, guards)
+      val res = org.pico.hashids.impl.decode(x)(effectiveAlphabet, salt, seps, guards)
 
       if (res.exists(_ < 0)) {
         List.empty

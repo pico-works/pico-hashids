@@ -1,6 +1,6 @@
-package org.hashids
+package org.pico.hashids
 
-import org.hashids.syntax._
+import org.pico.hashids.syntax._
 import org.scalacheck.Gen
 import org.specs2.ScalaCheck
 import org.specs2.mutable._

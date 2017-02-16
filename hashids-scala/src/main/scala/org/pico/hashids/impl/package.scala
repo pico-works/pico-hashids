@@ -1,4 +1,4 @@
-package org.hashids
+package org.pico.hashids
 
 import scala.annotation.tailrec
 

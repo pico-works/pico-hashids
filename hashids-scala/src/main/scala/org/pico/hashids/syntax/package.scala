@@ -1,4 +1,4 @@
-package org.hashids
+package org.pico.hashids
 
 package object syntax {
   implicit class HashidsLongOps(x: Long) {
