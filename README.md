@@ -1,4 +1,4 @@
-# Hashids.scala [![Circle CI](https://circleci.com/gh/newhoggy/hashids-scala.svg?style=svg)](https://circleci.com/gh/newhoggy/hashids-scala)
+# Hashids.scala [![Circle CI](https://circleci.com/gh/newhoggy/pico-hashids.svg?style=svg)](https://circleci.com/gh/newhoggy/pico-hashids)
 
 A small Scala library to generate YouTube-like hashes from one or many numbers.
 
@@ -22,15 +22,15 @@ You don't have to store these hashes in the database, but can encrypt + decrypt 
 
 All (long) integers need to be greater than or equal to zero.
 
-## Getting hashids-scala
+## Getting pico-hashids
 
-`hashids-scala` is currently under development.
+`pico-hashids` is currently under development.
 
 If you're using SBT, add the following lines to your build file:
 
     resolvers += "dl-john-ky" at "http://dl.john-ky.io/maven/releases"
 
-    libraryDependencies += "io.john-ky" %% "hashids-scala" % "1.1.2-2974446"
+    libraryDependencies += "org.picoworks" %% "pico-hashids"  % "4.4.141"
 
 ## Compatibility note
 
@@ -51,7 +51,7 @@ Application writers are must replace calls to `Hashids.apply` with one of the fo
 #### Import the package
 
 ```scala
-import org.hashids._
+import org.pico.hashids._
 ```
 
 #### Encrypting one number
@@ -203,15 +203,15 @@ val hash5 = hashids.encode(5L) /* rD */
 
 ## Implicit Scala Syntax
 
-`hashids-scala` also supports Scala idiomatic syntax for obtaining the hashids codec object from
-implicit scope.  Import `org.hashids.Hashids._` to enable this support.
+`pico-hashids` also supports Scala idiomatic syntax for obtaining the hashids codec object from
+implicit scope.  Import `org.pico.hashids.Hashids._` to enable this support.
 
 In the following examples, the `Long` and `Seq[Long]` is lifted to support the
 `hashid` method while `String` is lifted to support the `unhashid`, `hashidHex` and `unhashidHex` methods.
 
 ```scala
-import org.hashids.Hashids
-import org.hashids.syntax._
+import org.pico.hashids.Hashids
+import org.pico.hashids.syntax._
 
 implicit val hashids = Hashids.reference("this is my salt")
 val hash1 = 12345L.hashid
