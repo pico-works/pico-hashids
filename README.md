@@ -28,8 +28,6 @@ All (long) integers need to be greater than or equal to zero.
 
 If you're using SBT, add the following lines to your build file:
 
-    resolvers += "dl-john-ky" at "http://dl.john-ky.io/maven/releases"
-
     libraryDependencies += "org.picoworks" %% "pico-hashids"  % "4.4.141"
 
 ## Compatibility note
