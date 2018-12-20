@@ -48,7 +48,7 @@ class Hashids(
       }
   }
 
-  def decodeHex(hash: String): String = decode(hash).map(_.toHexString.substring(1).toUpperCase).mkString
+  def decodeHex(hash: String): String = decode(hash).reverse.map(_.toHexString.substring(1).toUpperCase).mkString
 
   def version = "1.0.0"
 }
