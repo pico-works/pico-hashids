@@ -1,6 +1,19 @@
+import Build.{scalacheck, specs2_core, specs2_scalacheck}
+
+import scala.sys.process._
+import Build._
+
 name := "pico-hashids"
 
 organization := "org.picoworks"
+
+lazy val `pico-hashids` = Project(id = "pico-hashids", base = file("pico-hashids"))
+  .standard
+  .testLibs(scalacheck, specs2_core, specs2_scalacheck)
+
+lazy val root = Project(id = "all", base = file("."))
+  .notPublished
+  .aggregate(`pico-hashids`)
 
 crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.0", "2.13.2")
 
