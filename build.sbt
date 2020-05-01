@@ -2,7 +2,7 @@ name := "pico-hashids"
 
 organization := "org.picoworks"
 
-crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.0")
+crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.0", "2.13.2")
 
 version in ThisBuild := Process("./version.sh").lines.head.trim
 
