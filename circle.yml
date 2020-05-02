@@ -1,17 +1,49 @@
-dependencies:
-  cache_directories:
-    - ~/.sbt/boot
-
-  pre:
-    - scripts/check-env-variables.sh
-    - scripts/get-credentials.sh
-
-  post:
-    - find ~/.sbt -name "*.lock" | xargs rm
-    - find ~/.ivy2 -name "ivydata-*.properties" | xargs rm
-
-deployment:
-  master:
-    branch: master
-    commands:
-      - sbt +publish
+version: 2
+jobs:
+  build:
+    docker:
+      - image: openjdk:8
+    environment:
+      SBT_VERSION: 1.0.4
+    steps:
+      - run: echo 'export ARTIFACT_BUILD=$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM.zip' >> $BASH_ENV
+      - run:
+          name: Get sbt binary
+          command: |
+            apt update && apt install -y curl
+            curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb
+            dpkg -i sbt-$SBT_VERSION.deb
+            rm sbt-$SBT_VERSION.deb
+      - checkout
+      - run: scripts/check-env-variables.sh
+      - run: scripts/get-credentials.sh
+      - restore_cache:
+          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+          key: sbt-cache
+      - run:
+          name: Compile
+          command: |
+            sbt -batch +test:compile +package
+      - run:
+          name: Test
+          command: |
+            sbt +test
+      - run:
+          name: Coverage
+          command: |
+            sbt coverage clean test coverageReport coverageAggregate
+            mkdir -p target/scala-2.11/coverage-report/
+            sbt codacyCoverage
+            bash <(curl -s https://codecov.io/bash)
+      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
+          path: target/universal/project.zip
+          destination: project
+      - save_cache:
+          key: sbt-cache
+          paths:
+            - "~/.ivy2/cache"
+            - "~/.sbt"
+            - "~/.m2"
+            - "~/.coursier"
+      # - deploy:
+      #     command: sbt +publish
