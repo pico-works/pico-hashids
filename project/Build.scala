@@ -4,7 +4,7 @@ import Keys._
 object Build {
   val specs2_core       = "org.specs2"      %%  "specs2-core"         % "4.8.3"
   val specs2_scalacheck = "org.specs2"      %%  "specs2-scalacheck"   % "4.8.3"
-  val scalacheck        = "org.scalacheck"  %%  "scalacheck"          % "1.13.4"
+  val scalacheck        = "org.scalacheck"  %%  "scalacheck"          % "1.14.3"
 
   implicit class ProjectOps(self: Project) {
     def standard: Project = {
