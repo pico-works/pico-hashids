@@ -115,6 +115,7 @@ class SpecHashids extends Specification with ScalaCheck {
       hashids.encodeHex("17b8d"      ) must_== "MRWNE"
       hashids.encodeHex("1d7f21dd38" ) must_== "4o6Z7KqxE"
       hashids.encodeHex("20015111d"  ) must_== "ooweQVNB"
+      hashids.encodeHex("FFFFFFFFFFFFEEEEEEEEEEEEDDDDDDDDDDDD"  ) must_== "oKRw6WPa4KTnq6M24Pv8sXL4pLNBeq"
     }
 
     "throw if non-hex string passed" >> {
@@ -130,6 +131,12 @@ class SpecHashids extends Specification with ScalaCheck {
       hashids.decodeHex("lzY"    ) must_== "FA"
       hashids.decodeHex("eBMrb"  ) must_== "FF1A"
       hashids.decodeHex("D9NPE"  ) must_== "12ABC"
+    }
+
+    "decodes long hex string back" >> {
+      hashids.decodeHex(hashids.encodeHex("FFFFFFFFFFFFEEEEEEEEEEEEDDDDDDDDDDDD")) must_== "FFFFFFFFFFFFEEEEEEEEEEEEDDDDDDDDDDDD"
+      hashids.decodeHex(hashids.encodeHex("FFFFFFFFFFFFEEEEEEEEEEEE"            )) must_== "FFFFFFFFFFFFEEEEEEEEEEEE"
+      hashids.decodeHex(hashids.encodeHex("FFFFFFFFFFFF"                        )) must_== "FFFFFFFFFFFF"
     }
   }
 
