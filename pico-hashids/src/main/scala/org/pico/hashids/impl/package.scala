@@ -67,7 +67,7 @@ package object impl {
           if (i + 1 < numbers.size) {
             val num = x % (last.codePointAt(0) + i)
             val sepsIndex = (num % seps.length).toInt
-            (newResult + seps.charAt((num % seps.length).toInt), newAlpha)
+            (newResult + seps.charAt(sepsIndex), newAlpha)
           } else {
             (newResult, newAlpha)
           }
