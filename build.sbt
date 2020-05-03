@@ -5,7 +5,7 @@ import Build._
 
 name := "pico-hashids"
 
-organization := "org.picoworks"
+organization := "org.pico"
 
 lazy val `pico-hashids` = Project(id = "pico-hashids", base = file("pico-hashids"))
   .standard
@@ -30,7 +30,7 @@ credentials += Credentials("Sonatype Nexus Repository Manager",
 pgpPassphrase := Some(Option(System.getenv("GPG_PASSPHRASE")).getOrElse("").toArray)
 
 // Your profile name of the sonatype account. The default is the same with the organization value
-sonatypeProfileName := "org.picoworks"
+sonatypeProfileName := "org.pico"
 
 // To sync with Maven central, you need to supply the following information:
 pomExtra in Global := {
