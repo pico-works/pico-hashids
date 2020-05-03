@@ -10,6 +10,8 @@ organization := "org.picoworks"
 lazy val `pico-hashids` = Project(id = "pico-hashids", base = file("pico-hashids"))
   .standard
   .settings(publishTo := Some("Releases" at "s3://dl.john-ky.io/maven/releases"))
+  .settings(publishConfiguration := publishConfiguration.value.withOverwrite(true))
+  .settings(publishLocalConfiguration := publishLocalConfiguration.value.withOverwrite(true))
   .testLibs(scalacheck, specs2_core, specs2_scalacheck)
 
 lazy val root = Project(id = "all", base = file("."))
